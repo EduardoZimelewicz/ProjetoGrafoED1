@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1457379219 source:c:\users\eduar\documents\projeto_ed_1\teste_grafo.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1457375798 c:\users\eduar\documents\projeto_ed_1\grafo.h
+
+1457376625 source:c:\users\eduar\documents\projeto_ed_1\grafo.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
