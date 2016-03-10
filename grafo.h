@@ -4,6 +4,7 @@
 typedef struct lista_viz ListaViz;
 typedef struct grafo Grafo;
 Grafo * cria_grafo();
+ListaViz * retira_l(ListaViz * l, int info);
 Grafo * retira_repetidos_g(Grafo * g);
 ListaViz * retira_repetidos_l(ListaViz * l);
 void destroi_grafo(Grafo * g);
@@ -18,5 +19,6 @@ ListaViz * retorna_prox_l(ListaViz * l);
 int retorna_peso(ListaViz * l);
 ListaViz * retorna_lista(Grafo * g);
 int busca_viz(ListaViz * l, int n);
+Grafo * retira_g (Grafo * g, int info);
 
 #endif // GRAFO_H_INCLUDED

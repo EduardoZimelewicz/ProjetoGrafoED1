@@ -40,6 +40,11 @@ int main(){
     imprime_grafo(g);
     printf("\n");
 
+    g = retira_g(g,2);
+
+    imprime_grafo(g);
+    printf("\n");
+
     //Escrita do Arquivo
     FILE * f_grafo_s;
     f_grafo_s = fopen("GrafoSaida.txt", "w");

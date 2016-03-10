@@ -183,3 +183,66 @@ int busca_viz(ListaViz * l, int n){
     }
     return 0;
 }
+
+ListaViz * retira_l(ListaViz * l, int info){
+    ListaViz * l_temp = l;
+    ListaViz * ant = NULL;
+    int ind = 0;
+    while(l_temp->prox != NULL && l_temp->info != info){
+        ant = l_temp;
+        l_temp = l_temp->prox;
+        ind++;
+    }
+
+    if(l_temp->info == info && ind == 0){
+        l = l_temp->prox;
+        free(l_temp);
+        return l;
+    }
+
+    else if(l_temp->info == info){
+        ant->prox = l_temp->prox;
+        free(l_temp);
+    }
+
+    return l;
+}
+
+
+Grafo * retira_g (Grafo * g, int info){
+    Grafo * g_temp = g;
+    Grafo * ant = NULL;
+    int ind = 0;
+    while(g_temp != NULL && g_temp->info != info){
+        ant = g_temp;
+        g_temp = g_temp->prox;
+        ind++;
+    }
+
+    if(g_temp == NULL){
+        printf("Nó não encontrado ou não existe");
+        return g;
+    }
+
+    if(g_temp->info == info){
+        Grafo * g_temp_2 = g;
+        while(g_temp_2->prox != NULL){
+            g_temp_2->lista_de_viz = retira_l(g_temp_2->lista_de_viz, info);
+            g_temp_2 = g_temp_2->prox;
+        }
+
+        destroi_lista_viz(g_temp->lista_de_viz);
+
+        if(ind != 0){
+        ant->prox = g_temp->prox;
+        free(g_temp);
+        }
+
+        else{
+            g = g_temp->prox;
+            free(g_temp);
+        }
+    }
+
+    return g;
+}
