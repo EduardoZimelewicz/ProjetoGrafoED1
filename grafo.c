@@ -173,14 +173,43 @@ int retorna_peso(ListaViz * l){
     return l->peso;
 }
 
+int retorna_info (Grafo * g){
+    return g->info;
+}
+
+int retorna_info_l(ListaViz * l){
+    return l->info;
+}
+
+int retorna_tamanho_l(ListaViz * l){
+    ListaViz * l_temp = l;
+    int tam = 1;
+    while(l_temp != NULL){
+        l_temp = l_temp->prox;
+        tam++;
+    }
+
+    return tam;
+}
+
 int busca_viz(ListaViz * l, int n){
     ListaViz * l_temp = l;
     while(l_temp->prox != NULL && n != l_temp->info){
         l_temp = l_temp->prox;
     }
+
+    if(l_temp->prox == NULL && n == l_temp->info){
+        return 1;
+    }
+
+    if(l_temp->prox == NULL){
+        return 0;
+    }
+
     if(n == l_temp->info){
         return 1;
     }
+
     return 0;
 }
 
@@ -226,7 +255,7 @@ Grafo * retira_g (Grafo * g, int info){
 
     if(g_temp->info == info){
         Grafo * g_temp_2 = g;
-        while(g_temp_2->prox != NULL){
+        while(g_temp_2 != NULL){
             g_temp_2->lista_de_viz = retira_l(g_temp_2->lista_de_viz, info);
             g_temp_2 = g_temp_2->prox;
         }

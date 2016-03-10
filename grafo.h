@@ -20,5 +20,7 @@ int retorna_peso(ListaViz * l);
 ListaViz * retorna_lista(Grafo * g);
 int busca_viz(ListaViz * l, int n);
 Grafo * retira_g (Grafo * g, int info);
-
+int retorna_info (Grafo * g);
+int retorna_info_l(ListaViz * l);
+int retorna_tamanho_l(ListaViz * l);
 #endif // GRAFO_H_INCLUDED

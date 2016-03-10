@@ -34,8 +34,6 @@ int main(){
 
     //Teste operações no grafo
     g = retira_repetidos_g(g);
-    g = insere_vertice_grafo(g, 6);
-    g = insere_aresta_grafo(g, 3, 6, 13);
 
     imprime_grafo(g);
     printf("\n");
@@ -58,38 +56,22 @@ int main(){
     Grafo * g_temp = g;
     ListaViz * l_temp = NULL;
 
-    i = 1;
-    j = 1;
+    fprintf(f_grafo_s, "Tamanho fo grafo: %d\n", tamanho_grafo);
 
-    fprintf(f_grafo_s, "%d\n", tamanho_grafo);
+    fprintf(f_grafo_s, "\n");
 
-    while(g_temp != NULL && i <= tamanho_grafo){
-            l_temp = retorna_lista(g_temp);
-        while(j <= tamanho_grafo){
-            if(l_temp == NULL){
-                fprintf(f_grafo_s, "0 ");
-            }
+    g_temp = g;
 
-            else{
-                if(busca_viz(l_temp, j) == 0){
-                    fprintf(f_grafo_s, "0 ");
-                }
-
-                if(busca_viz(l_temp, j)){
-                    fprintf(f_grafo_s, "%d ", retorna_peso(l_temp));
-                    l_temp = retorna_prox_l(l_temp);
-                }
-            }
-
-            j++;
-    }
-
+    while(g_temp != NULL){
+        l_temp = retorna_lista(g_temp);
+        fprintf(f_grafo_s, "pesos dos vizinhos de %d: ", retorna_info(g_temp));
+        while(l_temp != NULL){
+            fprintf(f_grafo_s, " grafo:%d  peso:%d ", retorna_info_l(l_temp), retorna_peso(l_temp));
+            l_temp = retorna_prox_l(l_temp);
+        }
         fprintf(f_grafo_s, "\n");
         g_temp = retorna_prox_g(g_temp);
-        i++;
-        j = 1;
     }
-
 
     destroi_grafo(g);
 

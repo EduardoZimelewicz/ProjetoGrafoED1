@@ -1,6 +1,6 @@
-5
-0 0 6 10 11 
-6 0 0 0 0 
-10 0 0 0 0 
-11 0 0 0 0 
-0 0 13 0 0 
+Tamanho fo grafo: 4
+
+pesos dos vizinhos de 1:  grafo:3  peso:6  grafo:4  peso:10  grafo:5  peso:11 
+pesos dos vizinhos de 3:  grafo:1  peso:6 
+pesos dos vizinhos de 4:  grafo:1  peso:10 
+pesos dos vizinhos de 5:  grafo:1  peso:11 
