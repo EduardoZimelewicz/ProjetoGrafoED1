@@ -29,7 +29,7 @@ int main(){
             }
         }
     }
-
+    //Fim da leitura
     fclose(f_grafo_e);
 
     //Teste operações no grafo
@@ -38,10 +38,11 @@ int main(){
     imprime_grafo(g);
     printf("\n");
 
-    g = retira_g(g,2);
+    //g = retira_g(g,2);
 
     imprime_grafo(g);
     printf("\n");
+    //Fim dos testes
 
     //Escrita do Arquivo
     FILE * f_grafo_s;
@@ -56,22 +57,46 @@ int main(){
     Grafo * g_temp = g;
     ListaViz * l_temp = NULL;
 
-    fprintf(f_grafo_s, "Tamanho fo grafo: %d\n", tamanho_grafo);
-
-    fprintf(f_grafo_s, "\n");
-
+    //Criação da matriz de impressão
     g_temp = g;
+    int mat_de_imp [tamanho_grafo][tamanho_grafo];
+    for(i = 0; i < tamanho_grafo; i++){
+        for(j = 0; j < tamanho_grafo; j++){
+            mat_de_imp[i][j] = 0;
+        }
+    }
 
+    i = 0;
+    j = 0;
     while(g_temp != NULL){
         l_temp = retorna_lista(g_temp);
-        fprintf(f_grafo_s, "pesos dos vizinhos de %d: ", retorna_info(g_temp));
         while(l_temp != NULL){
-            fprintf(f_grafo_s, " grafo:%d  peso:%d ", retorna_info_l(l_temp), retorna_peso(l_temp));
-            l_temp = retorna_prox_l(l_temp);
+            if(i != j){
+                mat_de_imp[i][j] = retorna_peso(l_temp);
+                l_temp = retorna_prox_l(l_temp);
+            }
+            j++;
         }
-        fprintf(f_grafo_s, "\n");
+        g_temp = retorna_prox_g(g_temp);
+        j = 0;
+        i++;
+    }
+
+    fprintf(f_grafo_s, "%d\n", tamanho_grafo);
+    g_temp = g;
+    while(g_temp != NULL){
+        fprintf(f_grafo_s, "%d ", retorna_info(g_temp));
         g_temp = retorna_prox_g(g_temp);
     }
+    fprintf(f_grafo_s, "\n");
+
+    for(i = 0; i < tamanho_grafo; i++){
+        for(j = 0; j < tamanho_grafo; j++){
+           fprintf(f_grafo_s,"%d ", mat_de_imp[i][j]);
+        }
+        fprintf(f_grafo_s,"\n");
+    }
+    //Término da escrita
 
     destroi_grafo(g);
 
