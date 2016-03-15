@@ -5,6 +5,7 @@
 typedef struct grafo {
     int dist; //distância para Dijkstra
     int info;
+    int visitado;
     struct lista_viz * lista_de_viz;
     struct grafo * prox; //próximo na lista do grafo;
 }Grafo;
@@ -12,6 +13,7 @@ typedef struct grafo {
 typedef struct lista_viz {
     int peso;
     int info;
+    int visitado;
     struct lista_viz * prox; //próximo na lista de vizinhos
 }ListaViz;
 
@@ -27,6 +29,70 @@ Grafo * cria_grafo(){
     return g;
 }
 
+void marcar(Grafo * g, int info){
+    Grafo * g_temp = g;
+    ListaViz * l_temp = g->lista_de_viz;
+    while(g_temp != NULL){
+            l_temp = g_temp->lista_de_viz;
+            if(g_temp->info == info){
+                g_temp->visitado = 1;
+            }
+        while(l_temp != NULL){
+            if(l_temp->info == info){
+                l_temp->visitado = 1;
+            }
+            l_temp = l_temp->prox;
+        }
+        g_temp = g_temp->prox;
+    }
+}
+
+int conexo (Grafo * g){
+    marcar(g, g->info);
+    Grafo * g_temp = g;
+    ListaViz * l_temp = g->lista_de_viz;
+    while(l_temp != NULL){
+        if(l_temp->visitado != 1){
+            conexo(busca_g(g, l_temp->info));
+        }
+        l_temp = l_temp->prox;
+    }
+
+    if(visitados_g(g)){
+        return 1;
+    }
+
+    return 0;
+}
+
+int visitados_g(Grafo * g){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+        if(g_temp->visitado != 1){
+            return 0;
+        }
+        g_temp = g_temp->prox;
+    }
+    return 1;
+}
+
+int tamanho_g(Grafo * g){
+    Grafo * g_temp = g;
+    int tamanho = 0;
+    while(g_temp != NULL){
+        tamanho++;
+        g_temp = g_temp->prox;
+    }
+    return tamanho;
+}
+
+void desmarca_vis(Grafo * g){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+        g_temp->visitado = 0;
+        g_temp = g_temp->prox;
+    }
+}
 
 int numero_de_nos(Grafo * g){
     Grafo * temp = g;
@@ -43,6 +109,7 @@ ListaViz * insere_lista_viz(ListaViz * l, int info, int peso){
     nova->peso = peso;
     nova->info = info;
     nova->prox = NULL;
+    nova->visitado = 0;
 
     if(l == NULL){
          return nova;
@@ -60,16 +127,13 @@ ListaViz * insere_lista_viz(ListaViz * l, int info, int peso){
 
 Grafo * busca_g(Grafo * g, int x){
     Grafo * g_temp = g;
-    while(g_temp != NULL && g_temp->info != x){
+    while(g_temp != NULL){
+        if(g_temp->info == x){
+            return g_temp;
+        }
         g_temp = g_temp->prox;
     }
-    if(g_temp == NULL){
-        return 0;
-    }
-    if(g_temp->info == x){
-        return 1;
-    }
-    return 0;
+    return;
 }
 
 Grafo * insere_vertice_grafo(Grafo * g, int info){
@@ -80,6 +144,7 @@ Grafo * insere_vertice_grafo(Grafo * g, int info){
 
     Grafo * novo = (Grafo *) malloc (sizeof(Grafo));
     novo->dist = 0;
+    novo->visitado = 0;
     novo->info = info;
     novo->lista_de_viz = NULL;
     novo->prox = NULL;
@@ -211,25 +276,16 @@ int retorna_tamanho_l(ListaViz * l){
     return tam;
 }
 
-int busca_viz(ListaViz * l, int n){
+ListaViz * busca_viz(ListaViz * l, int n){
     ListaViz * l_temp = l;
     while(l_temp->prox != NULL && n != l_temp->info){
         l_temp = l_temp->prox;
     }
 
-    if(l_temp->prox == NULL && n == l_temp->info){
-        return 1;
-    }
-
-    if(l_temp->prox == NULL){
-        return 0;
-    }
-
     if(n == l_temp->info){
-        return 1;
+        return l_temp;
     }
 
-    return 0;
 }
 
 ListaViz * retira_l(ListaViz * l, int info){

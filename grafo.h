@@ -18,10 +18,12 @@ Grafo * retorna_prox_g(Grafo * g);
 ListaViz * retorna_prox_l(ListaViz * l);
 int retorna_peso(ListaViz * l);
 ListaViz * retorna_lista(Grafo * g);
-int busca_viz(ListaViz * l, int n);
+ListaViz * busca_viz(ListaViz * l, int n);
 Grafo * retira_g (Grafo * g, int info);
 int retorna_info (Grafo * g);
 int retorna_info_l(ListaViz * l);
 int retorna_tamanho_l(ListaViz * l);
 Grafo * busca_g(Grafo * g, int x);
+int conexo (Grafo * g);
+int visitados_g(Grafo * g);
 #endif // GRAFO_H_INCLUDED

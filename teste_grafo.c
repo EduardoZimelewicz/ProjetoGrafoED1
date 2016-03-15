@@ -38,9 +38,7 @@ int main(){
     imprime_grafo(g);
     printf("\n");
 
-    g = retira_g(g,2);
-    g = insere_vertice_grafo(g,6);
-    g = insere_aresta_grafo(g, 6, 1, 9);
+    printf("%d\n", conexo(g));
 
     imprime_grafo(g);
     printf("\n");
