@@ -38,7 +38,9 @@ int main(){
     imprime_grafo(g);
     printf("\n");
 
-    //g = retira_g(g,2);
+    g = retira_g(g,2);
+    g = insere_vertice_grafo(g,6);
+    g = insere_aresta_grafo(g, 6, 1, 9);
 
     imprime_grafo(g);
     printf("\n");
@@ -83,12 +85,6 @@ int main(){
     }
 
     fprintf(f_grafo_s, "%d\n", tamanho_grafo);
-    g_temp = g;
-    while(g_temp != NULL){
-        fprintf(f_grafo_s, "%d ", retorna_info(g_temp));
-        g_temp = retorna_prox_g(g_temp);
-    }
-    fprintf(f_grafo_s, "\n");
 
     for(i = 0; i < tamanho_grafo; i++){
         for(j = 0; j < tamanho_grafo; j++){

@@ -23,4 +23,5 @@ Grafo * retira_g (Grafo * g, int info);
 int retorna_info (Grafo * g);
 int retorna_info_l(ListaViz * l);
 int retorna_tamanho_l(ListaViz * l);
+Grafo * busca_g(Grafo * g, int x);
 #endif // GRAFO_H_INCLUDED

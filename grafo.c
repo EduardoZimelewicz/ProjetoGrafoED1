@@ -58,7 +58,26 @@ ListaViz * insere_lista_viz(ListaViz * l, int info, int peso){
     }
 }
 
+Grafo * busca_g(Grafo * g, int x){
+    Grafo * g_temp = g;
+    while(g_temp != NULL && g_temp->info != x){
+        g_temp = g_temp->prox;
+    }
+    if(g_temp == NULL){
+        return 0;
+    }
+    if(g_temp->info == x){
+        return 1;
+    }
+    return 0;
+}
+
 Grafo * insere_vertice_grafo(Grafo * g, int info){
+    if(busca_g(g, info)){
+        printf("Ja existe o noh %d no grafo\n", info);
+        return g;
+    }
+
     Grafo * novo = (Grafo *) malloc (sizeof(Grafo));
     novo->dist = 0;
     novo->info = info;
