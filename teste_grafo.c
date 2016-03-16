@@ -21,7 +21,7 @@ int main(){
 
     //Inserçao no grafo
     for(i = 1; i <= tamanho_grafo; i++){
-        g = insere_vertice_grafo(g, i);
+        g = insere_vertice_grafo(g);
         for(j = 1; j <= tamanho_grafo; j++){
             fscanf(f_grafo_e, "%d", &peso);
             if(peso != 0){
@@ -39,9 +39,7 @@ int main(){
     printf("\n");
 
     printf("%d\n", conexo(g));
-
-    imprime_grafo(g);
-    printf("\n");
+    printf("%d\n", menor_caminho(g, 1, 7));
     //Fim dos testes
 
     //Escrita do Arquivo
@@ -58,7 +56,6 @@ int main(){
     ListaViz * l_temp = NULL;
 
     //Criação da matriz de impressão
-    g_temp = g;
     int mat_de_imp [tamanho_grafo][tamanho_grafo];
     for(i = 0; i < tamanho_grafo; i++){
         for(j = 0; j < tamanho_grafo; j++){
@@ -68,6 +65,7 @@ int main(){
 
     i = 0;
     j = 0;
+    g_temp = g;
     while(g_temp != NULL){
         l_temp = retorna_lista(g_temp);
         while(l_temp != NULL){

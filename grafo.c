@@ -3,9 +3,9 @@
 #include "grafo.h"
 
 typedef struct grafo {
-    int dist; //distância para Dijkstra
     int info;
     int visitado;
+    int menor_custo;
     struct lista_viz * lista_de_viz;
     struct grafo * prox; //próximo na lista do grafo;
 }Grafo;
@@ -13,7 +13,6 @@ typedef struct grafo {
 typedef struct lista_viz {
     int peso;
     int info;
-    int visitado;
     struct lista_viz * prox; //próximo na lista de vizinhos
 }ListaViz;
 
@@ -29,30 +28,65 @@ Grafo * cria_grafo(){
     return g;
 }
 
-void marcar(Grafo * g, int info){
-    Grafo * g_temp = g;
-    ListaViz * l_temp = g->lista_de_viz;
-    while(g_temp != NULL){
-            l_temp = g_temp->lista_de_viz;
-            if(g_temp->info == info){
-                g_temp->visitado = 1;
-            }
+int menor_caminho(Grafo * g, int orig, int dest){
+    desmarcar_todos(g);
+    g->menor_custo = 873563756436;
+    return menor_cam(g, orig, dest, 0);
+}
+
+int menor_cam(Grafo * g, int orig, int dest, int custo){
+    if(orig == dest){
+        if(custo < g->menor_custo){
+            g->menor_custo = custo;
+        }
+    }
+    else{
+        marcar(g, orig);
+        ListaViz * l_temp = busca_g(g,orig)->lista_de_viz;
         while(l_temp != NULL){
-            if(l_temp->info == info){
-                l_temp->visitado = 1;
+            if(busca_g(g, l_temp->info)->visitado != 1){
+                menor_cam(g, l_temp->info, dest, custo+l_temp->peso);
             }
             l_temp = l_temp->prox;
         }
+        desmarcar(g, orig);
+    }
+    return g->menor_custo;
+}
+
+void marcar(Grafo * g, int info){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+            if(g_temp->info == info){
+                g_temp->visitado = 1;
+            }
+        g_temp = g_temp->prox;
+    }
+}
+
+void desmarcar(Grafo * g, int info){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+            if(g_temp->info == info){
+                g_temp->visitado = 0;
+            }
+        g_temp = g_temp->prox;
+    }
+}
+
+void desmarcar_todos(Grafo * g){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+        g_temp->visitado = 0;
         g_temp = g_temp->prox;
     }
 }
 
 int conexo (Grafo * g){
     marcar(g, g->info);
-    Grafo * g_temp = g;
     ListaViz * l_temp = g->lista_de_viz;
     while(l_temp != NULL){
-        if(l_temp->visitado != 1){
+        if((busca_g(g, l_temp->info))->visitado != 1){
             conexo(busca_g(g, l_temp->info));
         }
         l_temp = l_temp->prox;
@@ -109,7 +143,6 @@ ListaViz * insere_lista_viz(ListaViz * l, int info, int peso){
     nova->peso = peso;
     nova->info = info;
     nova->prox = NULL;
-    nova->visitado = 0;
 
     if(l == NULL){
          return nova;
@@ -133,21 +166,27 @@ Grafo * busca_g(Grafo * g, int x){
         }
         g_temp = g_temp->prox;
     }
-    return;
+    return g;
 }
 
-Grafo * insere_vertice_grafo(Grafo * g, int info){
-    if(busca_g(g, info)){
-        printf("Ja existe o noh %d no grafo\n", info);
-        return g;
+int retorna_info_ult(Grafo * g){
+    if(g == NULL){
+        return 0;
     }
+    Grafo * g_temp = g;
+    while(g_temp->prox != NULL){
+        g_temp = g_temp->prox;
+    }
+    return g_temp->info;
+}
 
+Grafo * insere_vertice_grafo(Grafo * g){
     Grafo * novo = (Grafo *) malloc (sizeof(Grafo));
-    novo->dist = 0;
     novo->visitado = 0;
-    novo->info = info;
+    novo->info = retorna_info_ult(g) + 1;
     novo->lista_de_viz = NULL;
     novo->prox = NULL;
+    novo->menor_custo = 0;
 
     if(g == NULL){
         return novo;

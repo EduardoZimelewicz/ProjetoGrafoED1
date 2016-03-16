@@ -9,7 +9,7 @@ Grafo * retira_repetidos_g(Grafo * g);
 ListaViz * retira_repetidos_l(ListaViz * l);
 void destroi_grafo(Grafo * g);
 void destroi_lista_viz(ListaViz * l);
-Grafo * insere_vertice_grafo(Grafo * g, int info);
+Grafo * insere_vertice_grafo(Grafo * g);
 Grafo * insere_aresta_grafo(Grafo * g, int valor1, int valor2, int peso);
 ListaViz * insere_lista_viz(ListaViz * l, int info, int peso);
 void imprime_grafo(Grafo * g);
@@ -26,4 +26,5 @@ int retorna_tamanho_l(ListaViz * l);
 Grafo * busca_g(Grafo * g, int x);
 int conexo (Grafo * g);
 int visitados_g(Grafo * g);
+int menor_cam(Grafo * g, int orig, int dest, int custo);
 #endif // GRAFO_H_INCLUDED
