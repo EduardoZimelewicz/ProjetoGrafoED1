@@ -8,6 +8,7 @@ Grafo * cria_grafo();
 int existe_g(Grafo * g, int info);
 int menor_caminho(Grafo * g, int orig, int dest);
 int menor_cam(Grafo * g, int orig, int dest, int custo);
+int existe_cam(Grafo * g, int orig, int dest);
 void marcar(Grafo * g, int info);
 void desmarcar(Grafo * g, int info);
 void desmarcar_todos(Grafo * g);

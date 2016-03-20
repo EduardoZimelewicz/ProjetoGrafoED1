@@ -36,11 +36,12 @@ int main(){
     int rodando = 1;
     int ops; //opções de operações
 
+    printf("O projeto permite as seguintes operacoes no grafo lido do arquivo: GrafoEntrada.txt\n");
+    printf("Projeto de ED1: Grafos. Eduardo Zimelewicz e Paulo Vivas\n");
+
     while(rodando){
 
-    printf("Projeto de ED1: Grafos. Eduardo Zimelewicz e Paulo Vivas\n");
     printf("\n");
-    printf("O projeto permite as seguintes operacoes no grafo lido do arquivo: GrafoEntrada.txt\n");
     printf("1)Inserir vertice\n");
     printf("2)Inserir aresta entre dois vertices\n");
     printf("3)Retirar um vertice\n");
@@ -50,6 +51,7 @@ int main(){
     printf("0)Para fechar o programa\n");
 
     scanf("%d", &ops);
+    printf("\n");
 
     switch(ops){
     case 0:{
@@ -71,7 +73,11 @@ int main(){
         scanf("%d", &v2);
         printf("peso:\n");
         scanf("%d", &peso2);
-        if(!existe_g(g, v1)){
+        if(v1 == v2){
+            printf("Nao e possivel inserir uma aresta entre dois vertices iguais\n");
+            break;
+        }
+        else if(!existe_g(g, v1)){
             printf("O vertice 1 nao existe no grafo atual. Insira o seguinte vertice para realizar a operacao\n");
             break;
         }
@@ -102,6 +108,7 @@ int main(){
         }
         else{
             printf("O grafo nao eh conexo\n");
+            break;
         }
         desmarcar_todos(g);
         break;
@@ -113,6 +120,7 @@ int main(){
         scanf("%d", &v1);
         printf("vertice 2:\n");
         scanf("%d", &v2);
+
         if(!existe_g(g, v1)){
             printf("O vertice 1 nao existe no grafo atual. Insira o seguinte vertice para realizar o calculo\n");
             break;
@@ -121,6 +129,13 @@ int main(){
             printf("O vertice 2 nao existe no grafo atual. Insira o seguinte vertice para realizar o calculo\n");
             break;
         }
+
+        else if(!existe_cam(g, v1, v2)){
+            printf("Nao existe caminho possivel entre os dois vertices\n");
+            desmarcar_todos(g);
+            break;
+        }
+
         resultado = menor_caminho(g, v1, v2);
         printf("O menor caminho do vertice %d ao %d eh: %d\n", v1, v2, resultado);
         desmarcar_todos(g);

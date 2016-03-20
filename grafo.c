@@ -28,6 +28,7 @@ Grafo * cria_grafo(){
     return g;
 }
 
+
 int existe_g(Grafo * g, int info){
     Grafo * g_temp = g;
     while(g_temp != NULL){
@@ -44,6 +45,17 @@ int menor_caminho(Grafo * g, int orig, int dest){
     g->menor_custo = 873563756436;
     return menor_cam(g, orig, dest, 0);
 }
+
+/*
+int infinito(Grafo * g){
+    int custo_total = 0;
+    Grafo * g = g_temp;
+    ListaViz * l_temp = g->lista_de_viz;
+    while()
+
+}
+*/
+
 
 int menor_cam(Grafo * g, int orig, int dest, int custo){
     if(orig == dest){
@@ -63,6 +75,25 @@ int menor_cam(Grafo * g, int orig, int dest, int custo){
         desmarcar(g, orig);
     }
     return g->menor_custo;
+}
+
+
+int existe_cam(Grafo * g, int orig, int dest){
+    if(orig == dest){
+        return 1;
+    }
+    else{
+        marcar(g, orig);
+        ListaViz * l_temp = busca_g(g, orig)->lista_de_viz;
+        while(l_temp != NULL){
+            if(busca_g(g, l_temp->info)->visitado != 1){
+                return existe_cam(g, l_temp->info, dest);
+            }
+            l_temp = l_temp->prox;
+        }
+    }
+    desmarcar(g, orig);
+    return 0;
 }
 
 void marcar(Grafo * g, int info){
