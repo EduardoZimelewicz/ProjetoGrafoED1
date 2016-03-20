@@ -45,7 +45,7 @@ int main(){
     printf("1)Inserir vertice\n");
     printf("2)Inserir aresta entre dois vertices\n");
     printf("3)Retirar um vertice\n");
-    printf("4)Verificar se eh conexo\n");
+    printf("4)Verificar se e conexo\n");
     printf("5)Mostrar menor caminho entre dois vertices\n");
     printf("6)Imprime o grafo\n");
     printf("0)Para fechar o programa\n");
@@ -56,6 +56,7 @@ int main(){
     switch(ops){
     case 0:{
         rodando = 0;
+        printf("o seu Grafo esta salvo no arquivo GrafoSaida.txt na pasta do projeto\n");
         break;
     }
     case 1:{
@@ -98,16 +99,18 @@ int main(){
         }
         else{
             g = retira_g(g, v1);
+            break;
         }
-        break;
     }
     case 4:{
         if(conexo(g)){
-            printf("O grafo eh conexo\n");
+            printf("O grafo e conexo\n");
+            desmarcar_todos(g);
             break;
         }
         else{
-            printf("O grafo nao eh conexo\n");
+            printf("O grafo nao e conexo\n");
+            desmarcar_todos(g);
             break;
         }
         desmarcar_todos(g);
@@ -146,19 +149,9 @@ int main(){
         printf("\n");
         break;
     default:
-        printf("O operaçao escolhida nao existe\n");
+        printf("A operaçao escolhida nao existe\n");
         break;
     }
-
-     //Teste operações no grafo
-    /*
-    imprime_grafo(g);
-    printf("\n");
-
-    printf("%d\n", conexo(g));
-    printf("%d\n", menor_caminho(g, 2, 6));
-    //Fim dos testes
-    */
 
     }
 
@@ -208,6 +201,7 @@ int main(){
         }
         fprintf(f_grafo_s,"\n");
     }
+
     //Término da escrita
     destroi_grafo(g);
 

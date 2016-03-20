@@ -8,6 +8,7 @@ Grafo * cria_grafo();
 int existe_g(Grafo * g, int info);
 int menor_caminho(Grafo * g, int orig, int dest);
 int menor_cam(Grafo * g, int orig, int dest, int custo);
+ListaViz * retira_l_prim(ListaViz * l);
 int existe_cam(Grafo * g, int orig, int dest);
 void marcar(Grafo * g, int info);
 void desmarcar(Grafo * g, int info);
@@ -37,4 +38,5 @@ int retorna_tamanho_l(ListaViz * l);
 ListaViz * busca_viz(ListaViz * l, int n);
 ListaViz * retira_l(ListaViz * l, int info);
 Grafo * retira_g (Grafo * g, int info);
+
 #endif // GRAFO_H_INCLUDED

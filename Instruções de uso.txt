@@ -1,0 +1,34 @@
+Bem vindo ao projeto de Grafos de Estrutura de Dados 1, por Eduardo Zimelewicz e Paulo Vivas.
+
+Para começar a usar é necessário criar um grafo inicial no arquivo GrafoEntrada.txt, o arquivo deve seguir o seguinte corpo
+
+4 ----> tamanho do grafo
+0 1 1 1 -----> vizinhos do vertice 1
+1 0 1 1 -----> vizinhos do vertice 2
+1 1 0 1 -----> vizinhos do vertice 3
+1 1 1 0 -----> vizinhos do vertice 4
+
+Os números são os respectivos pesos dos vizinhos de cada vértice.
+Aqui há outro exemplo para ajudar:
+
+4
+0 5 3 8
+5 0 5 6
+3 5 0 7
+8 6 7 0
+
+É necessário colocar os devidos pesos nas posições corretas para o trabalho no grafo.
+Perceba que
+As seguintes operações(e seus códigos) são oferecidas:
+
+1)Inserir vértice
+2)Inserir aresta entre dois vértices
+3)Retirar um vértice
+4)Verificar se é conexo
+5)Mostrar menor caminho entre dois vértices
+6)Imprime o grafo
+0)Para fechar o programa
+
+Não se preocupe em errar no momento de passar os dados, as devidas verificações são feitas na execução :-).
+O seu grafo será salvo no arquivo GrafoSaida.txt.
+Divirta-se!

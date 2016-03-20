@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "grafo.h"
 
 typedef struct grafo {
@@ -40,22 +41,12 @@ int existe_g(Grafo * g, int info){
     return 0;
 }
 
+
 int menor_caminho(Grafo * g, int orig, int dest){
     desmarcar_todos(g);
     g->menor_custo = 873563756436;
     return menor_cam(g, orig, dest, 0);
 }
-
-/*
-int infinito(Grafo * g){
-    int custo_total = 0;
-    Grafo * g = g_temp;
-    ListaViz * l_temp = g->lista_de_viz;
-    while()
-
-}
-*/
-
 
 int menor_cam(Grafo * g, int orig, int dest, int custo){
     if(orig == dest){
@@ -72,11 +63,26 @@ int menor_cam(Grafo * g, int orig, int dest, int custo){
             }
             l_temp = l_temp->prox;
         }
-        desmarcar(g, orig);
+
+    desmarcar(g, orig);
+
     }
     return g->menor_custo;
 }
 
+
+ListaViz * retira_l_prim(ListaViz * l){
+    ListaViz * l_temp = l;
+    ListaViz * ant = NULL;
+    while(l_temp->prox != NULL){
+        ant = l_temp;
+        l_temp = l_temp->prox;
+    }
+    ant->prox = NULL;
+    free(l_temp);
+    return l;
+
+}
 
 int existe_cam(Grafo * g, int orig, int dest){
     if(orig == dest){
@@ -410,8 +416,20 @@ Grafo * retira_g (Grafo * g, int info){
     }
 
     if(g_temp->info == info){
+        if(ind == 0 && g_temp->lista_de_viz == NULL){
+            g = g_temp->prox;
+            free(g_temp);
+            return g;
+        }
+
+        if(g_temp->lista_de_viz == NULL){
+            ant->prox = g_temp->prox;
+            free(g_temp);
+            return g;
+        }
+
         Grafo * g_temp_2 = g;
-        while(g_temp_2 != NULL){
+        while(g_temp_2 != NULL && g_temp_2->lista_de_viz != NULL){
             g_temp_2->lista_de_viz = retira_l(g_temp_2->lista_de_viz, info);
             g_temp_2 = g_temp_2->prox;
         }

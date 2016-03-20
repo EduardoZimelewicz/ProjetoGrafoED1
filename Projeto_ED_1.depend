@@ -11,14 +11,15 @@
 	<stdlib.h>
 	"grafo.h"
 
-1458488391 source:c:\users\familia\documents\code blocks\projetografoed1-master\grafo.c
+1458516434 source:c:\users\familia\documents\code blocks\projetografoed1-master\grafo.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"grafo.h"
 
-1458485739 c:\users\familia\documents\code blocks\projetografoed1-master\grafo.h
+1458515334 c:\users\familia\documents\code blocks\projetografoed1-master\grafo.h
 
-1458487589 source:c:\users\familia\documents\code blocks\projetografoed1-master\teste_grafo.c
+1458516898 source:c:\users\familia\documents\code blocks\projetografoed1-master\teste_grafo.c
 	<stdio.h>
 	<stdlib.h>
 	"grafo.h"
