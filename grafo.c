@@ -28,6 +28,17 @@ Grafo * cria_grafo(){
     return g;
 }
 
+int existe_g(Grafo * g, int info){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+        if(g_temp->info == info){
+            return 1;
+        }
+        g_temp = g_temp->prox;
+    }
+    return 0;
+}
+
 int menor_caminho(Grafo * g, int orig, int dest){
     desmarcar_todos(g);
     g->menor_custo = 873563756436;
@@ -325,6 +336,7 @@ ListaViz * busca_viz(ListaViz * l, int n){
         return l_temp;
     }
 
+    return l;
 }
 
 ListaViz * retira_l(ListaViz * l, int info){
@@ -363,7 +375,6 @@ Grafo * retira_g (Grafo * g, int info){
     }
 
     if(g_temp == NULL){
-        printf("Nó não encontrado ou não existe");
         return g;
     }
 
