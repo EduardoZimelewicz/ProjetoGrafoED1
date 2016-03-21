@@ -35,7 +35,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="grafo.h" />
-		<Unit filename="teste_grafo.c">
+		<Unit filename="principal_grafo.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

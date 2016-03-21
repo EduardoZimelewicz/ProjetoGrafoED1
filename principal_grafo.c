@@ -140,7 +140,7 @@ int main(){
         }
 
         resultado = menor_caminho(g, v1, v2);
-        printf("O menor caminho do vertice %d ao %d eh: %d\n", v1, v2, resultado);
+        printf("O menor caminho do vertice %d ao %d e: %d\n", v1, v2, resultado);
         desmarcar_todos(g);
         break;
     }
