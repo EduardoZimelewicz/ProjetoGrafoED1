@@ -183,8 +183,10 @@ int main(){
         l_temp = retorna_lista(g_temp);
         while(l_temp != NULL){
             if(i != j){
-                mat_de_imp[i][j] = retorna_peso(l_temp);
-                l_temp = retorna_prox_l(l_temp);
+                if(retorna_info_l(l_temp) == j+1){
+                    mat_de_imp[i][j] = retorna_peso(l_temp);
+                    l_temp = retorna_prox_l(l_temp);
+                }
             }
             j++;
         }

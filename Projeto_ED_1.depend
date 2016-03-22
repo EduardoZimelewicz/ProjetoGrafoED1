@@ -4,11 +4,12 @@
 	<stdlib.h>
 	"grafo.h"
 
-1458160467 c:\users\eduar\documents\projeto_ed_1\grafo.h
+1458607493 c:\users\eduar\documents\projeto_ed_1\grafo.h
 
-1458160418 source:c:\users\eduar\documents\projeto_ed_1\grafo.c
+1458607692 source:c:\users\eduar\documents\projeto_ed_1\grafo.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"grafo.h"
 
 1458516434 source:c:\users\familia\documents\code blocks\projetografoed1-master\grafo.c
@@ -20,6 +21,11 @@
 1458515334 c:\users\familia\documents\code blocks\projetografoed1-master\grafo.h
 
 1458516898 source:c:\users\familia\documents\code blocks\projetografoed1-master\teste_grafo.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1458608259 source:c:\users\eduar\documents\projeto_ed_1\principal_grafo.c
 	<stdio.h>
 	<stdlib.h>
 	"grafo.h"
