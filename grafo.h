@@ -9,7 +9,8 @@ int existe_g(Grafo * g, int info);
 int menor_caminho(Grafo * g, int orig, int dest);
 int menor_cam(Grafo * g, int orig, int dest, int custo);
 ListaViz * retira_l_prim(ListaViz * l);
-int existe_cam(Grafo * g, int orig, int dest);
+int existe_caminho(Grafo*g,int orig, int dest);
+void existe_cam(Grafo * g, int orig, int dest);
 void marcar(Grafo * g, int info);
 void desmarcar(Grafo * g, int info);
 void desmarcar_todos(Grafo * g);
@@ -35,8 +36,12 @@ int retorna_peso(ListaViz * l);
 int retorna_info (Grafo * g);
 int retorna_info_l(ListaViz * l);
 int retorna_tamanho_l(ListaViz * l);
+int existe_l(ListaViz * l, int n);
 ListaViz * busca_viz(ListaViz * l, int n);
 ListaViz * retira_l(ListaViz * l, int info);
+Grafo * retira_aresta(Grafo * g, int v1, int v2);
 Grafo * retira_g (Grafo * g, int info);
+void imprime_lista(ListaViz * l);
+ListaViz * retorna_menor_caminho(Grafo * g);
 
 #endif // GRAFO_H_INCLUDED

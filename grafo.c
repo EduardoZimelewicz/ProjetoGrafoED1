@@ -8,6 +8,7 @@ typedef struct grafo {
     int visitado;
     int menor_custo;
     struct lista_viz * lista_de_viz;
+    int existe_cam;
     struct grafo * prox; //próximo na lista do grafo;
 }Grafo;
 
@@ -84,22 +85,29 @@ ListaViz * retira_l_prim(ListaViz * l){
 
 }
 
-int existe_cam(Grafo * g, int orig, int dest){
+int existe_caminho(Grafo*g,int orig, int dest){
+    g->existe_cam = 0;
+    existe_cam(g,orig,dest);
+    return g->existe_cam;
+}
+
+void existe_cam(Grafo * g, int orig, int dest){
     if(orig == dest){
-        return 1;
+        g->existe_cam = 1;
+
     }
     else{
         marcar(g, orig);
         ListaViz * l_temp = busca_g(g, orig)->lista_de_viz;
         while(l_temp != NULL){
             if(busca_g(g, l_temp->info)->visitado != 1){
-                return existe_cam(g, l_temp->info, dest);
+                 existe_cam(g, l_temp->info, dest);
             }
             l_temp = l_temp->prox;
         }
     }
     desmarcar(g, orig);
-    return 0;
+
 }
 
 void marcar(Grafo * g, int info){
@@ -107,6 +115,7 @@ void marcar(Grafo * g, int info){
     while(g_temp != NULL){
             if(g_temp->info == info){
                 g_temp->visitado = 1;
+                return;
             }
         g_temp = g_temp->prox;
     }
@@ -117,6 +126,7 @@ void desmarcar(Grafo * g, int info){
     while(g_temp != NULL){
             if(g_temp->info == info){
                 g_temp->visitado = 0;
+                return;
             }
         g_temp = g_temp->prox;
     }
@@ -363,6 +373,23 @@ int retorna_tamanho_l(ListaViz * l){
     return tam;
 }
 
+int existe_l(ListaViz * l, int n){
+    ListaViz * l_temp = l;
+    while(l_temp->prox != NULL && n != l_temp->info){
+        l_temp = l_temp->prox;
+    }
+
+    if(n == l_temp->info && l_temp->prox == NULL){
+        return 1;
+    }
+
+    if(n == l_temp->info){
+        return 1;
+    }
+
+    return 0;
+}
+
 ListaViz * busca_viz(ListaViz * l, int n){
     ListaViz * l_temp = l;
     while(l_temp->prox != NULL && n != l_temp->info){
@@ -392,6 +419,11 @@ ListaViz * retira_l(ListaViz * l, int info){
         return l;
     }
 
+    else if(l_temp->prox == NULL && l_temp->info == info){
+        ant->prox = NULL;
+        free(l_temp);
+    }
+
     else if(l_temp->info == info){
         ant->prox = l_temp->prox;
         free(l_temp);
@@ -400,6 +432,19 @@ ListaViz * retira_l(ListaViz * l, int info){
     return l;
 }
 
+Grafo * retira_aresta(Grafo * g, int v1, int v2){
+    Grafo * g_temp = g;
+    while(g_temp != NULL){
+        if(g_temp->info == v1){
+            g_temp->lista_de_viz = retira_l(g_temp->lista_de_viz, v2);
+        }
+        if(g_temp->info == v2){
+            g_temp->lista_de_viz = retira_l(g_temp->lista_de_viz, v1);
+        }
+        g_temp = g_temp->prox;
+    }
+    return g;
+}
 
 Grafo * retira_g (Grafo * g, int info){
     Grafo * g_temp = g;

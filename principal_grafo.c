@@ -48,6 +48,7 @@ int main(){
     printf("4)Verificar se e conexo\n");
     printf("5)Mostrar menor caminho entre dois vertices\n");
     printf("6)Imprime o grafo\n");
+    printf("7)Retirar uma aresta entre dois vertices\n");
     printf("0)Para fechar o programa\n");
 
     scanf("%d", &ops);
@@ -86,6 +87,12 @@ int main(){
             printf("O vertice 2 nao existe no grafo atual. Insira o seguinte vertice para realizar a operacao\n");
             break;
         }
+
+        else if(peso2 == 0){
+            printf("Nao e possivel adicionar uma aresta com peso 0\n");
+            break;
+        }
+
         g = insere_aresta_grafo(g, v1, v2, peso2);
         break;
         }
@@ -108,7 +115,7 @@ int main(){
             desmarcar_todos(g);
             break;
         }
-        else{
+        else if(!conexo(g)){
             printf("O grafo nao e conexo\n");
             desmarcar_todos(g);
             break;
@@ -133,7 +140,7 @@ int main(){
             break;
         }
 
-        else if(!existe_cam(g, v1, v2)){
+        else if(!existe_caminho(g, v1, v2)){
             printf("Nao existe caminho possivel entre os dois vertices\n");
             desmarcar_todos(g);
             break;
@@ -144,12 +151,43 @@ int main(){
         desmarcar_todos(g);
         break;
     }
-    case 6:
+    case 6:{
         imprime_grafo(g);
         printf("\n");
         break;
+    }
+
+    case 7:{
+        printf("Escolha os dois vertices:\n");
+        int v1, v2;
+        printf("vertice 1:\n");
+        scanf("%d", &v1);
+        printf("vertice 2:\n");
+        scanf("%d", &v2);
+
+        if(!existe_g(g,v1)){
+            printf("O vertice 1 nao existe no grafo atual. Insira o seguinte vertice para realizar o calculo\n");
+            break;
+        }
+        else if(!existe_g(g, v2)){
+            printf("O vertice 2 nao existe no grafo atual. Insira o seguinte vertice para realizar o calculo\n");
+            break;
+        }
+
+        else if(!existe_caminho(g, v1, v2)){
+            printf("Nao existe ligacao entre esses dois vertices, impossivel fazer essa operacao\n");
+            desmarcar_todos(g);
+            break;
+        }
+
+            g = retira_aresta(g, v1, v2);
+            desmarcar_todos(g);
+            break;
+
+    }
+
     default:
-        printf("A operaçao escolhida nao existe\n");
+        printf("A operacao escolhida nao existe\n");
         break;
     }
 
